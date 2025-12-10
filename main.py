@@ -28,4 +28,21 @@ class AdressBook:
             newContact=Contact(first,last,address,city,state,zip,number,email)
             contact_list.append(newContact)
 
+    def edit_contact():
+        name=input("Enter First Name of contact to be edited: ")
+        for contact in contact_list:
+            if(contact.first_name==name):
+                print("Re-enter the details for ",name)
+                contact.first_name=input("First Name: ")
+                contact.last_name=input("Last Name: ")  
+                contact.address=input("Address: ")
+                contact.city=input("City: ")
+                contact.state=input("State: ")
+                contact.zip=input("Zip: ")
+                contact.number=input("Phone Number: ")
+                contact.email=input("Email: ")
+
+
+
 AdressBook.add_contact()
+AdressBook.edit_contact()
