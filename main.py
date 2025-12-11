@@ -50,6 +50,13 @@ class AdressBook:
                 print("Contact deleted Successfully")
 
 
+    def add_multiple():
+        n=input("Enter the number of people to be added :")
+        for i in range(n):
+            
+
+
+
 
 
 AdressBook.add_contact()
