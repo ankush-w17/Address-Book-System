@@ -15,7 +15,7 @@ print(ankush.email)
 
 
 class AdressBook:
-    def add_contact():
+    def add_contact(self):
             first=input("First Name: ")
             last=input("Last Name: ")
             address=input("Address: ")
@@ -28,7 +28,7 @@ class AdressBook:
             newContact=Contact(first,last,address,city,state,zip,number,email)
             contact_list.append(newContact)
 
-    def edit_contact():
+    def edit_contact(self):
         name=input("Enter First Name of contact to be edited: ")
         for contact in contact_list:
             if(contact.first_name==name):
@@ -42,7 +42,7 @@ class AdressBook:
                 contact.number=input("Phone Number: ")
                 contact.email=input("Email: ")
 
-    def delete_contact():
+    def delete_contact(self):
         name=input("Enter the name of contact to be deleted :")
         for contact in contact_list:
             if(contact.first_name==name):
@@ -50,14 +50,14 @@ class AdressBook:
                 print("Contact deleted Successfully")
 
 
-    def add_multiple():
-        n=input("Enter the number of people to be added :")
+    def add_multiple(self):
+        n= int(input("Enter the number of people to be added :"))
         for i in range(n):
-            
+            print("Enter details")
+            self.add_contact()
 
 
 
 
-
-AdressBook.add_contact()
-AdressBook.delete_contact()
+book=AdressBook()
+book.add_multiple()
