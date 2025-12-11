@@ -17,8 +17,18 @@ class AddressBook:
         self.name=name
         self.contact_list=[]
 
+
+    def is_duplicate(self, first_name): 
+        for contact in self.contact_list:
+            if contact.first_name.lower() == first_name.lower():
+                return True
+        return False
+
     def add_contact(self):
             first=input("First Name: ")
+            if self.is_duplicate(first):
+                print(f"Error: Contact '{first}' already exists in this address book!")
+                return
             last=input("Last Name: ")
             address=input("Address: ")
             city=input("City: ")
