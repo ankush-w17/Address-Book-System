@@ -1,4 +1,3 @@
-contact_list=[]
 class Contact:
     def __init__(self, first_name, last_name, address, city, state, zip, number, email):
         self.first_name=first_name
@@ -10,11 +9,14 @@ class Contact:
         self.number=number
         self.email=email
 
-ankush=Contact("Ankush","Wadhwani","A-35","Bareilly","Uttar Pradesh","243001","8791859640","ankushwadhwani222@gmail.com")
-print(ankush.email)
 
 
-class AdressBook:
+
+class AddressBook:
+    def __init__(self,name):
+        self.name=name
+        self.contact_list=[]
+
     def add_contact(self):
             first=input("First Name: ")
             last=input("Last Name: ")
@@ -26,11 +28,11 @@ class AdressBook:
             email=input("Email: ")
 
             newContact=Contact(first,last,address,city,state,zip,number,email)
-            contact_list.append(newContact)
+            self.contact_list.append(newContact)
 
     def edit_contact(self):
         name=input("Enter First Name of contact to be edited: ")
-        for contact in contact_list:
+        for contact in self.contact_list:
             if(contact.first_name==name):
                 print("Re-enter the details for ",name)
                 contact.first_name=input("First Name: ")
@@ -44,9 +46,9 @@ class AdressBook:
 
     def delete_contact(self):
         name=input("Enter the name of contact to be deleted :")
-        for contact in contact_list:
+        for contact in self.contact_list:
             if(contact.first_name==name):
-                contact_list.remove(contact)
+                self.contact_list.remove(contact)
                 print("Contact deleted Successfully")
 
 
@@ -71,5 +73,59 @@ class AddressBookSystem:
         new_book = AddressBook(name)
         self.addressBookDict[name] = new_book
         print(f"Address book '{name}' created successfully!\n")
+        return new_book
 
 
+def main():
+    print("Welcome to Address Book System")
+    obj=AddressBookSystem()
+    current_book=None
+    while True:
+        print("1. Create New Address Book")
+        print("2. Select Address Book")
+        print("3. Display All Address Books")
+        print("4. Exit")
+
+        if current_book:
+            print(f"\nCurrently working with: '{current_book.name}'")
+            print("5. Add Contact")
+            print("6. Add Multiple Contacts")
+            print("7. Edit Contact")
+            print("8. Delete Contact")
+
+
+        choice=input("\nEnter your Choice :")
+
+        if choice == "1":
+            new_book = obj.create_address_book()  
+            if new_book:
+                current_book = new_book 
+            
+        elif choice == "2":
+            current_book = obj.select_address_book()
+            
+        elif choice == "3":
+            obj.display_all_books()
+            
+        elif choice == "4":
+            print("\nThank you for using Address Book System")
+            break
+            
+        elif choice == "5" and current_book:
+            current_book.add_contact()
+            
+        elif choice == "6" and current_book:
+            current_book.add_multiple()
+            
+        elif choice == "7" and current_book:
+            current_book.edit_contact()
+            
+        elif choice == "8" and current_book:
+            current_book.delete_contact()
+
+        else:
+            print("Invalid choice!")
+
+
+if __name__ == "__main__":
+    main()
