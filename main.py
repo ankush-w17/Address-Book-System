@@ -42,7 +42,15 @@ class AdressBook:
                 contact.number=input("Phone Number: ")
                 contact.email=input("Email: ")
 
+    def delete_contact():
+        name=input("Enter the name of contact to be deleted :")
+        for contact in contact_list:
+            if(contact.first_name==name):
+                contact_list.remove(contact)
+                print("Contact deleted Successfully")
+
+
 
 
 AdressBook.add_contact()
-AdressBook.edit_contact()
+AdressBook.delete_contact()
