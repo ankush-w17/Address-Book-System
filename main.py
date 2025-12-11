@@ -57,7 +57,19 @@ class AdressBook:
             self.add_contact()
 
 
+class AddressBookSystem:
+    def __init__(self):
+        self.addressBookDict = {}
+    
+    def create_address_book(self):
+        name = input("Enter the name of the address book: ")
+        
+        if name in self.addressBookDict:
+            print(f"Error: Address book '{name}' already exists!")
+            return None
+        
+        new_book = AddressBook(name)
+        self.addressBookDict[name] = new_book
+        print(f"Address book '{name}' created successfully!\n")
 
 
-book=AdressBook()
-book.add_multiple()
