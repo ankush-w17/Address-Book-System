@@ -85,6 +85,60 @@ class AddressBookSystem:
         print(f"Address book '{name}' created successfully!\n")
         return new_book
 
+    def search_person_by_city(self, city):
+        results = []
+        for book_name, book in self.addressBookDict.items():
+            for contact in book.contact_list:
+                if contact.city.lower() == city.lower():
+                    results.append((book_name, contact))
+        return results
+
+    def search_person_by_state(self, state):
+        results = []
+        for book_name, book in self.addressBookDict.items():
+            for contact in book.contact_list:
+                if contact.state.lower() == state.lower():
+                    results.append((book_name, contact))
+        return results
+
+    def search_by_city_or_state(self):
+        print("\n--- Search Person ---")
+        print("1. Search by City")
+        print("2. Search by State")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            city = input("Enter city name: ")
+            results = self.search_person_by_city(city)
+            
+            if not results:
+                print(f"\nNo persons found in city '{city}'.")
+            else:
+                print(f"\nPersons in {city}")
+                for book_name, contact in results:
+                    print(f"\nAddress Book: {book_name}")
+                    print(contact.first_name)
+                print(f"\nTotal: {len(results)} person(s) found")
+        
+        elif choice == "2":
+            state = input("Enter state name: ")
+            results = self.search_person_by_state(state)
+            
+            if not results:
+                print(f"\nNo persons found in state '{state}'.")
+            else:
+                print(f"\nPersons in {state} ")
+                for book_name, contact in results:
+                    print(f"\nAddress Book: {book_name}")
+                    print(contact.first_name)
+                print(f"\nTotal: {len(results)} person(s) found")
+        
+        else:
+            print("Invalid choice!")
+
+
+
 
 def main():
     print("Welcome to Address Book System")
@@ -94,14 +148,15 @@ def main():
         print("1. Create New Address Book")
         print("2. Select Address Book")
         print("3. Display All Address Books")
-        print("4. Exit")
+        print("4. Search Person by City or State") 
+        print("5. Exit")
 
         if current_book:
             print(f"\nCurrently working with: '{current_book.name}'")
-            print("5. Add Contact")
-            print("6. Add Multiple Contacts")
-            print("7. Edit Contact")
-            print("8. Delete Contact")
+            print("6. Add Contact")
+            print("7. Add Multiple Contacts")
+            print("8. Edit Contact")
+            print("9. Delete Contact")
 
 
         choice=input("\nEnter your Choice :")
@@ -118,19 +173,22 @@ def main():
             obj.display_all_books()
             
         elif choice == "4":
-            print("\nThank you for using Address Book System")
+            obj.search_by_city_or_state()  # UC8
+            
+        elif choice == "5":
+            print("\nThank you for using Address Book System!")
             break
             
-        elif choice == "5" and current_book:
+        elif choice == "6" and current_book:
             current_book.add_contact()
             
-        elif choice == "6" and current_book:
+        elif choice == "7" and current_book:
             current_book.add_multiple()
             
-        elif choice == "7" and current_book:
+        elif choice == "8" and current_book:
             current_book.edit_contact()
             
-        elif choice == "8" and current_book:
+        elif choice == "9" and current_book:
             current_book.delete_contact()
 
         else:
