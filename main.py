@@ -85,6 +85,33 @@ class AddressBookSystem:
         print(f"Address book '{name}' created successfully!\n")
         return new_book
 
+    def select_address_book(self):
+        if not self.addressBookDict:
+            print("\nNo address books available. Please create one first.")
+            return None
+        
+        print("\nAvailable Address Books")
+        for name in self.addressBookDict.keys():
+            print(f"- {name}")
+        
+        book_name = input("\nEnter the name of the address book: ")
+        
+        if book_name in self.addressBookDict:
+            print(f"Selected '{book_name}'.\n")
+            return self.addressBookDict[book_name]
+        else:
+            print(f"Address book '{book_name}' not found.")
+            return None
+
+    def display_all_books(self):
+        if not self.addressBookDict:
+            print("\nNo address books in the system.")
+        else:
+            print("\nAll Address Books")
+            for name, book in self.addressBookDict.items():
+                print(f"- {name} ({len(book.contact_list)} contacts)")
+            print()
+
     def search_person_by_city(self, city):
         results = []
         for book_name, book in self.addressBookDict.items():
