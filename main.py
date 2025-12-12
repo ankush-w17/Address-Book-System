@@ -101,6 +101,34 @@ class AddressBookSystem:
                     results.append((book_name, contact))
         return results
 
+    def get_count_by_city(self):
+        city_count = {}
+        
+        for book in self.addressBookDict.values():
+            for contact in book.contact_list:
+                city = contact.city
+                if city in city_count:
+                    city_count[city] += 1
+                else:
+                    city_count[city] = 1
+        
+        return city_count
+
+    def get_count_by_state(self):
+        state_count = {}
+        
+        for book in self.addressBookDict.values():
+            for contact in book.contact_list:
+                state = contact.state
+                if state in state_count:
+                    state_count[state] += 1
+                else:
+                    state_count[state] = 1
+        
+        return state_count
+
+    
+
     def search_by_city_or_state(self):
         print("\n--- Search Person ---")
         print("1. Search by City")
