@@ -127,7 +127,37 @@ class AddressBookSystem:
         
         return state_count
 
-    
+    def display_count_by_city_or_state(self):
+        print("\n--- View Count ---")
+        print("1. Count by City")
+        print("2. Count by State")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            city_count = self.get_count_by_city()
+            
+            if not city_count:
+                print("\nNo contacts available in any address book.")
+            else:
+                print("\n--- Count by City ---")
+                for city, count in city_count.items():
+                    print(f"{city}: {count} person(s)")
+                print(f"\nTotal cities: {len(city_count)}")
+        
+        elif choice == "2":
+            state_count = self.get_count_by_state()
+            
+            if not state_count:
+                print("\nNo contacts available in any address book.")
+            else:
+                print("\n--- Count by State ---")
+                for state, count in state_count.items():
+                    print(f"{state}: {count} person(s)")
+                print(f"\nTotal states: {len(state_count)}")
+        
+        else:
+            print("Invalid choice!")
 
     def search_by_city_or_state(self):
         print("\n--- Search Person ---")
@@ -177,14 +207,15 @@ def main():
         print("2. Select Address Book")
         print("3. Display All Address Books")
         print("4. Search Person by City or State") 
-        print("5. Exit")
+        print("5. View Count by City or State")  
+        print("6. Exit")
 
         if current_book:
             print(f"\nCurrently working with: '{current_book.name}'")
-            print("6. Add Contact")
-            print("7. Add Multiple Contacts")
-            print("8. Edit Contact")
-            print("9. Delete Contact")
+            print("7. Add Contact")
+            print("8. Add Multiple Contacts")
+            print("9. Edit Contact")
+            print("10. Delete Contact")
 
 
         choice=input("\nEnter your Choice :")
@@ -201,22 +232,25 @@ def main():
             obj.display_all_books()
             
         elif choice == "4":
-            obj.search_by_city_or_state()  # UC8
+            obj.search_by_city_or_state()  
             
         elif choice == "5":
+            obj.display_count_by_city_or_state() 
+            
+        elif choice == "6":
             print("\nThank you for using Address Book System!")
             break
             
-        elif choice == "6" and current_book:
+        elif choice == "7" and current_book:
             current_book.add_contact()
             
-        elif choice == "7" and current_book:
+        elif choice == "8" and current_book:
             current_book.add_multiple()
             
-        elif choice == "8" and current_book:
+        elif choice == "9" and current_book:
             current_book.edit_contact()
             
-        elif choice == "9" and current_book:
+        elif choice == "10" and current_book:
             current_book.delete_contact()
 
         else:
